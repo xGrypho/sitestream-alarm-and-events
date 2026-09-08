@@ -1,0 +1,23 @@
+Generated with built-in ImageGen.
+
+Create a high resolution technical diagram for "Alert & Event Dispatch Center". Match the attached approved diagram STYLE ONLY: white background, dark navy #102A4C typography, primary blue #087FE8 outlines/arrows, green success/resolved, amber warnings, red critical/failure. Modern Inter-like sans-serif, clean thin rounded cards, crisp meaningful outline icons, generous whitespace. English labels, readable text, no gradients, 3D, decorative art. This is a NEW different diagram, do not copy lifecycle content. Title "Domain data model". Create a spacious high-resolution entity relationship diagram, landscape technical poster. Eight entity boxes with exact field lists below, readable English, PK/FK markers, NO SQL data types. Blue borders, navy text, thin orthogonal relationship connectors routed outside boxes with explicit cardinality labels at both ends. Avoid ambiguous crossing lines. Use enough space. Customer is included because source relationships require it.
+Entity Customer: "customerId [PK]".
+Entity Site: "siteId [PK]"; "name"; "customerId [FK]"; "address / coordinates".
+Entity Trailer: "trailerId [PK] (e.g. 0026T)"; "customerId [FK]"; "siteId [FK]"; "operationalStatus"; "lastCommunicationAt".
+Entity Camera: "cameraId [PK]"; "trailerId [FK]"; "name"; "onlineStatus"; "lastSeenAt".
+Entity Event (largest central box): "eventId [PK]"; "trailerId [FK]"; "cameraId [FK, optional]"; "type"; "priority: Critical, High, Medium, Low"; "status: Unreviewed, In Progress, Resolved"; "detectedAt"; "resolvedAt (optional)"; "assignedUserId [FK, optional]".
+Entity EventActivityLog: "activityId [PK]"; "eventId [FK]"; "actorUserId [FK]"; "actionType"; "description"; "createdAt"; "deliveryStatus (optional)".
+Entity EventNote: "noteId [PK]"; "eventId [FK]"; "authorUserId [FK]"; "content"; "createdAt".
+Entity User: "userId [PK]"; "displayName"; "role".
+Relationships with cardinality labels:
+Customer 1 to Site 0..* (has sites).
+Site 1 to Trailer 0..* (has trailers).
+Trailer 1 to Camera 0..* (has cameras).
+Trailer 1 to Event 0..* (has events).
+Event 1 to EventActivityLog 0..* (activity).
+Event 1 to EventNote 0..* (notes).
+User 1 to EventActivityLog 0..* (creates logs).
+User 1 to EventNote 0..* (authors notes).
+Camera 0..1 to Event 0..* (optional source camera). Amber dashed connector; 0..1 at Camera end, 0..* at Event end.
+User 0..1 to Event 0..* (optional assignee). Amber dashed connector; 0..1 at User end, 0..* at Event end.
+Layout strategy: Customer and Site near upper left, Trailer upper center, Camera upper right, Event center, User left lower, EventActivityLog bottom center and EventNote bottom right. Route connectors in generous gutters and place labels close to endpoints. Optional associations explicitly dashed amber. Legend "1 = one", "0..* = zero or many", "0..1 = optional one", "PK = primary key", "FK = foreign key". Exact field spelling essential. No invented fields.

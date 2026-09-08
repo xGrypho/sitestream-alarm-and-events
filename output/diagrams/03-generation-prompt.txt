@@ -1,0 +1,38 @@
+Generated with built-in ImageGen.
+
+Create a high resolution technical diagram for "Alert & Event Dispatch Center". Match the attached approved diagram STYLE ONLY: white background, dark navy #102A4C typography, primary blue #087FE8 outlines/arrows, green success/resolved, amber warnings, red critical/failure. Modern Inter-like sans-serif, clean thin rounded cards, crisp meaningful outline icons, generous whitespace. English labels, readable text, no gradients, 3D, decorative art. This is a NEW different diagram, do not copy lifecycle content. Title "Action and audit-log sequence". Large high-resolution portrait technical poster, at least 2400 x 3200 visual density, enough space for 6 participant lanes and 4 vertically stacked grouped scenarios. Standard UML sequence diagram. Participant headers LEFT TO RIGHT exactly: Operator; Web UI; Event API; Notification Service; Activity Log Store; Mobile Device / Email Recipient. Dashed vertical lifelines, horizontal arrows between correct lanes, solid requests, dashed returns, time flows downward. Group sections clearly. Use compact accurate English text, do not omit API signatures or messages. No decorative icons occupying space.
+Section 1 "Acknowledge":
+Operator -> Web UI: "Click Acknowledge"
+Web UI -> Event API: 'updateEventStatus(eventId, "In Progress")'
+Event API self-call: "Save status"
+Event API -> Activity Log Store: '"Event acknowledged" + timestamp + user ID'
+Event API --> Web UI: "Updated event"
+Web UI self-call: "Refresh Incident Queue and Event Activity"
+Section 2 "Send to Mobile":
+Operator -> Web UI: "Click Send to Mobile"
+Web UI -> Event API: "sendMobileNotification(eventId)"
+Event API -> Notification Service: "Request delivery"
+Notification Service -> Mobile Device / Email Recipient: "Deliver mobile notification"
+Mobile Device / Email Recipient --> Notification Service: "Delivery result"
+Notification Service --> Event API: "Delivery result"
+Draw standard alt frame with two mutually exclusive branches:
+[Success] Event API -> Activity Log Store: '"Event sent to mobile"'
+Event API --> Web UI: "Success; append Event Activity entry"
+[Delivery failure] Event API -> Activity Log Store: "Failed delivery activity entry"
+Event API --> Web UI: "Actionable error; show failure and retry option"
+Use green success and red failure arrows, clearly keep failure in separate alt branch.
+Section 3 "Add Note":
+Operator -> Web UI: "Write note; click Add Note"
+Web UI -> Event API: "createEventNote(eventId, noteText)"
+Event API self-call: "Store note"
+Event API -> Activity Log Store: 'Note added: “<note text>”'
+Event API --> Web UI: "Saved note and activity"
+Web UI self-call: "Clear note field; update Event Activity"
+Section 4 "Resolve":
+Operator -> Web UI: "Click Resolve"
+Web UI -> Event API: 'updateEventStatus(eventId, "Resolved")'
+Event API self-call: "Save status"
+Event API -> Activity Log Store: '"Event resolved"'
+Event API --> Web UI: "Updated event"
+Web UI self-call: "Remove from active queues; show in Resolved History"
+All message lines must originate and terminate on correct participant lifelines. Use large canvas and generous vertical spacing, never overlapping labels.

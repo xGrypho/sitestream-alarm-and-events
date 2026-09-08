@@ -1,0 +1,12 @@
+Generated with built-in ImageGen, based on section 1 of assets/dispatch-diagram-prompts.md.
+
+Create a clean technical state-machine diagram titled "Event lifecycle state machine" with subtitle "Alert & Event Dispatch Center". Landscape high-resolution image, white background, dark navy text (#102A4C), primary blue (#087FE8), green for resolved states, red only for critical priority. Inter or similar modern sans-serif, thin rounded cards, consistent line weights, clear arrowheads, generous whitespace, readable concise English labels. No gradients, 3D, decorative illustrations, or database schema.
+Main row left to right: a small entry node labelled "New alert received", then three LARGE rounded state cards:
+"Unreviewed" with description "New event requiring operator attention"
+"In Progress" with description "Acknowledged and being handled"
+"Resolved History" with description "Closed and retained for audit and review".
+Draw explicit right-pointing arrows: entry node to Unreviewed; Unreviewed to In Progress labelled "Acknowledge"; In Progress to Resolved History labelled "Resolve". Unreviewed and In Progress blue borders, Resolved History green border. Do not color Unreviewed red, because priority is independent from workflow state.
+Above the main row, draw one dashed return arrow from Resolved History back to In Progress, arrowhead pointing into In Progress, labelled "Optional Reopen" and smaller "Future capability". Route it cleanly above cards with no crossing labels.
+Under In Progress attach a clearly grouped set of four action chips "View Live", "Send to Mobile", "Email Alert", "Add Note", connected to that state with a thin line without an arrowhead. Below chips add a clearly readable note: "These actions do not change the event state." and "Each action creates an Activity Log entry."
+At bottom include a compact legend with small colored dots: "Red: critical priority", "Blue: operator workflow", "Green: resolved / auditable state".
+All text must be spelled accurately, clean hierarchical layout designed for software engineers reviewing a technical design. Make the three state cards the visual focus, sufficiently large to read at presentation size.

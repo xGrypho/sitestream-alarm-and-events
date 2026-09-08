@@ -1,0 +1,10 @@
+Generated with built-in ImageGen.
+
+Create a high resolution technical diagram for "Alert & Event Dispatch Center". Match the attached approved diagram STYLE ONLY: white background, dark navy #102A4C typography, primary blue #087FE8 outlines/arrows, green success/resolved, amber warnings, red critical/failure. Modern Inter-like sans-serif, clean thin rounded cards, crisp meaningful outline icons, generous whitespace. English labels, readable text, no gradients, 3D, decorative art. This is a NEW different diagram, do not copy lifecycle content. Title "Operator event-handling flow". Wide landscape left-to-right flow with six numbered steps, each a tall card, connected by clear right arrows, preceded by small "Alert received" entry. Fit on a spacious canvas with readable descriptions:
+1 "Incident Queue" / "Unreviewed" / "New event enters the queue".
+2 "Filter trailers" / "Multi-select one or more units" / example "0014T · Copper Ridge" / "Options ordered by trailer number".
+3 "Review event" / "Select an event" / "Event details" / "Camera evidence" / "Map location" / "Equipment health".
+4 "Acknowledge" / "Move to In Progress" / "Create an activity-log entry".
+5 "Take action" / "Any combination" / four clear action rows "View Live", "Send to Mobile", "Email Alert", "Add Note" / "Each action appends a timestamped activity entry".
+6 "Resolve" / "Move to Resolved History" / "Preserve event details, notes, and the full activity log". Green final card.
+Below step 3 draw two callouts: one side branch to "Last Critical Events" with "Global critical events remain visible regardless of the selected trailer"; one smaller callout "Camera health" with "3 / 4 online, 1 offline". Side branches do not interrupt the main flow. Technical implementation proposal, no additional steps.
