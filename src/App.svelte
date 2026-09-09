@@ -3,6 +3,9 @@
   import QueueSection from './lib/QueueSection.svelte';
   type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
   type IncidentStatus = 'Unreviewed' | 'In Progress' | 'Resolved';
+  type ActivityEntry = { time: string; text: string; userName?: string };
+
+  const currentUserName = 'Operations Lead';
 
   type Incident = {
     id: number;
@@ -50,12 +53,12 @@
   let showSiteFilter = false;
   let selectedTrailers = [...new Set(incidents.map((incident) => incident.trailer))];
   let noteText = '';
-  let eventLogs: Record<number, Array<{ time: string; text: string }>> = {
+  let eventLogs: Record<number, ActivityEntry[]> = {
     1: [
       { time: '10:24 AM', text: 'Event received from Camera 1' },
       { time: '10:27 AM', text: 'Assigned to Operations Lead' },
     ],
-    6: [{ time: '10:16 AM', text: 'Event acknowledged' }],
+    6: [{ time: '10:16 AM', text: 'Event acknowledged', userName: currentUserName }],
   };
 
   $: selected = incidents.find((incident) => incident.id === selectedId) ?? incidents[0];
@@ -80,7 +83,7 @@
   function action(message: string, logMessage = message) {
     if (selected) {
       const time = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit' }).format(new Date());
-      eventLogs = { ...eventLogs, [selected.id]: [...(eventLogs[selected.id] ?? []), { time, text: logMessage }] };
+      eventLogs = { ...eventLogs, [selected.id]: [...(eventLogs[selected.id] ?? []), { time, text: logMessage, userName: currentUserName }] };
     }
     notice = message;
     window.setTimeout(() => (notice = ''), 2800);
@@ -138,7 +141,7 @@
           <span>⌕</span><input aria-label="Search alerts" class="w-full bg-transparent outline-none" placeholder="Search sites, trailers, or events..." />
         </label>
         <button class="relative text-xl text-slate-600" aria-label="Notifications">♟<span class="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-bold text-white">11</span></button>
-        <button class="flex items-center gap-2 text-sm font-semibold text-slate-700">Operations Lead <span class="text-xs">⌄</span></button>
+        <button class="flex items-center gap-2 text-sm font-semibold text-slate-700">{currentUserName} <span class="text-xs">⌄</span></button>
       </div>
     </div>
     <nav class="mt-4 flex gap-7" aria-label="Main navigation">
@@ -182,7 +185,7 @@
         {#if activityLog.length}
           <ol class="mt-3 space-y-2 border-l-2 border-blue-200 pl-4">
             {#each activityLog as log}
-              <li class="relative flex items-start gap-3 text-sm"><span class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-primary"></span><time class="w-16 shrink-0 font-semibold text-primary">{log.time}</time><span class="text-slate-700">{log.text}</span></li>
+              <li class="relative flex items-start gap-3 text-sm"><span class="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-primary"></span><time class="w-16 shrink-0 font-semibold text-primary">{log.time}</time><span class="min-w-0 break-words text-slate-700">{log.text}{#if log.userName}<span class="text-slate-500"> · <span class="font-semibold">{log.userName}</span></span>{/if}</span></li>
             {/each}
           </ol>
         {:else}
